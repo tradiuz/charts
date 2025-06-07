@@ -94,14 +94,14 @@ spec:
           - name: FOUNDRY_USERNAME
             valueFrom:
               secretKeyRef:
-                name: {{ template "foundry-vtt.fullname" . }}
+                name: {{ default (include "foundry-vtt.fullname" . ) .Values.foundryvtt.configSecretName }}
                 key: username
           {{- end }}
           {{- if .Values.foundryvtt.password }}
           - name: FOUNDRY_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: {{ template "foundry-vtt.fullname" . }}
+                name: {{ default (include "foundry-vtt.fullname" . ) .Values.foundryvtt.configSecretName }}
                 key: password
           {{- end }}
           {{- if .Values.foundryvtt.releaseUrl }}
@@ -112,7 +112,7 @@ spec:
           - name: FOUNDRY_ADMIN_KEY
             valueFrom:
               secretKeyRef:
-                name: {{ template "foundry-vtt.fullname" . }}
+                name: {{ default (include "foundry-vtt.fullname" . ) .Values.foundryvtt.configSecretName }}
                 key: adminPassword
           {{- if .Values.foundryvtt.hostname }}
           - name: FOUNDRY_HOSTNAME
@@ -126,7 +126,7 @@ spec:
           - name: FOUNDRY_LICENSE_KEY
             valueFrom:
               secretKeyRef:
-                name: {{ template "foundry-vtt.fullname" . }}
+                name: {{ default (include "foundry-vtt.fullname" . ) .Values.foundryvtt.configSecretName }}
                 key: licenseKey
           {{- end }}
           {{- if .Values.foundryvtt.minifyStaticFiles }}
@@ -168,7 +168,7 @@ spec:
           - name: FOUNDRY_TURN_CONFIGS
             valueFrom:
               secretKeyRef:
-                name: {{ template "foundry-vtt.fullname" . }}-turn-configs
+                name: {{ default (include "foundry-vtt.fullname" . ) .Values.foundryvtt.configSecretName }}-turn-configs
                 key: turnConfigs.json
           {{- end }}
           {{- if .Values.foundryvtt.turnMaxPort }}
