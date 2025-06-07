@@ -57,10 +57,12 @@ spec:
               number: {{ .Values.service.port }}
 {{- if and (.Values.ingress.tls.enabled) (not (eq .Values.ingress.tls.source "external")) }}
   tls:
+    - hosts:
+      - {{ .Values.ingress.hostname }}
     {{- if eq .Values.ingress.tls.source "secret" }}
-    - secretName: {{ default (printf "%s-signed" (include "foundry-vtt.fullname" .)) .Values.ingress.tls.secretName }} 
+      secretName: {{ default (printf "%s-signed" (include "foundry-vtt.fullname" .)) .Values.ingress.tls.secretName }} 
     {{- else }}
-    - secretName: {{ template "foundry-vtt.fullname" . }}-ingress
+      secretName: {{ template "foundry-vtt.fullname" . }}-ingress
     {{- end}}
 {{- end }}
 {{- end }}
