@@ -47,7 +47,7 @@ spec:
   - hosts:
     - {{ .Values.ingress.hostname }}
     {{- if eq .Values.ingress.tls.source "secret" }}
-    secretName: {{ template "foundry-vtt.fullname" . }}-signed
+    secretName: {{ default (printf "%s-signed" (include "foundry-vtt.fullname" .)) .Values.ingress.tls.secretName }} 
     {{- else }}
     secretName: {{ template "foundry-vtt.fullname" . }}-ingress
     {{- end}}

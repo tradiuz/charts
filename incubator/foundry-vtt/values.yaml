@@ -223,6 +223,9 @@ foundryvtt:
   ### All configurations details are provided here: https://foundryvtt.com/article/hosting/
   ### All supported environment variables can be found here: https://github.com/felddy/foundryvtt-docker/README.md
 
+  ## This sets the config secret to use for the passwords/license key.  If it is set, do not create a new secret.
+  configSecretName: ""
+
   ## Account username or email address for foundryvtt.com. Required for downloading an application distribution.
   username: ""
 
@@ -236,10 +239,10 @@ foundryvtt:
   licenseKey: ""
 
   ## Admin password. Default: admin
-  adminPassword: admin
+  adminPassword: ""
 
   ## A custom hostname to use in place of the host machine's public IP address when displaying the address of the game session. This allows for reverse proxies or DNS servers to modify the public address.
-  hostname: "foundry.domain.com"
+  hostname: "foundry.example.com"
 
   ## The default application language and module which provides the core translation files. Default is "en.core"
   language: en.core
