@@ -61,6 +61,10 @@ spec:
           - name: CONTAINER_CACHE
             value: {{ .Values.container.cache }}
           {{- end }}
+          {{- if .Values.container.cacheSize }}
+          - name: CONTAINER_CACHE_SIZE
+            value: {{ .Values.container.cacheSize | quote }}
+          {{- end }}
           {{- if .Values.container.gid }}
           - name: FOUNDRY_GID
             value: {{ .Values.container.gid | quote }}
@@ -229,6 +233,9 @@ spec:
         hostPath:
           path: {{ .Values.persistence.bind.hostpath }}
           type: Directory
+    {{- else if and (.Values.persistence.dataDir.enabled) (.Values.persistence.dataDir.claimName) }}
+        persistentVolumeClaim:
+          claimName: {{ .Values.persistence.dataDir.claimName }}
     {{- else if .Values.persistence.dataDir.enabled }}
         persistentVolumeClaim:
           claimName: {{ template "foundry-vtt.fullname" . }}
