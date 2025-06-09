@@ -1,20 +1,4 @@
 {{- if and (eq .Values.ingress.enabled true) (eq .Values.ingress.class "traefik") }}
-{{- if .Values.ingress.tls.enabled }}
-apiVersion: traefik.io/v1alpha1
-kind: Middleware
-metadata:
-  name: {{ template "foundry-vtt.fullname" . }}
-  labels:
-    app: {{ template "foundry-vtt.fullname" . }}
-    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
-    heritage: {{ .Release.Service }}
-    release: {{ .Release.Name }}
-spec:
-  redirectScheme:
-    scheme: https
-    permanent: true
-{{- end }}
----
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -55,7 +39,7 @@ spec:
             name: {{ template "foundry-vtt.fullname" . }}
             port:
               number: {{ .Values.service.port }}
-{{- if and (.Values.ingress.tls.enabled) (not (eq .Values.ingress.tls.source "external")) }}
+{{- if and (.Values.ingress.tls.enabled) (ne .Values.ingress.tls.source "external") }}
   tls:
     - hosts:
       - {{ .Values.ingress.hostname }}
