@@ -39,12 +39,8 @@ jobs:
           fi
 
       - name: Run chart-testing (lint)
+        if: steps.list-changed.outputs.changed == 'true'
         env:
           FOLDERS: incubator
           BRANCH: main
         run: ls && ct version && ct lint --chart-dirs ${FOLDERS} --target-branch $BRANCH
-#      - name: Create kind cluster
-#        uses: helm/kind-action@v1.2.0
-#        if: steps.list-changed.outputs.changed == 'true'
-#      - name: Run chart-testing (install)
-#        run: ct install
