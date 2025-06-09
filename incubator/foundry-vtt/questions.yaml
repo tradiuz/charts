@@ -109,6 +109,7 @@ questions:
     group: Foundry
 
   - variable: ingress.enabled
+    group: Ingress
     label: Enable Ingress
     type: boolean
     default: true
@@ -123,8 +124,29 @@ questions:
       - "nginx"
       - "contour"
       - "traefik"
+  - variable: ingress.annotations
+    show_if: "ingress.enabled=true"
+    label: Ingress Annotations
+    type: annotations
+
   - variable: ingress.configurationSnippet
     label: Configuration snippet
+    group: Ingress
     description: Add additional Nginx configuration here.
     show_if: "ingress.class=nginx"
     type: multiline
+
+  - variable: image.repository
+    label: Image repository
+    default: felddy/foundryvtt
+    group: Image
+
+  - variable: image.tag
+    label: Release Tag
+    default: release
+    group: Image
+
+  - variable: image.pullPolicy
+    label: Pull Policy
+    default: felddy/foundryvtt
+    group: Image
