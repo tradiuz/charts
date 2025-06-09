@@ -90,23 +90,26 @@ spec:
             value: {{ .Values.container.verbose | quote }}
           {{- end }}
           # Foundry fetch files only
-          {{- if or .Values.foundryvtt.username   (!empty .Values.foundryvtt.configSecretName)}}
+          {{- if or .Values.foundryvtt.username (not (empty .Values.foundryvtt.configSecretName))}}
           - name: FOUNDRY_USERNAME
             valueFrom:
               secretKeyRef:
                 name: {{ default (include "foundry-vtt.fullname" . ) .Values.foundryvtt.configSecretName }}
                 key: username
           {{- end }}
-          {{- if or .Values.foundryvtt.password  (!empty .Values.foundryvtt.configSecretName) }}
+          {{- if or .Values.foundryvtt.password (not (empty .Values.foundryvtt.configSecretName)) }}
           - name: FOUNDRY_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: {{ default (include "foundry-vtt.fullname" . ) .Values.foundryvtt.configSecretName }}
                 key: password
           {{- end }}
-          {{- if .Values.foundryvtt.releaseUrl }}
+          {{- if or .Values.foundryvtt.releaseUrl (not (empty .Values.foundryvtt.configSecretName)) }}
           - name: FOUNDRY_RELEASE_URL
-            value: {{ .Values.foundryvtt.releaseUrl }}
+            valueFrom:  
+              secretKeyRef:
+                name: {{ default (include "foundry-vtt.fullname" . ) .Values.foundryvtt.configSecretName }}
+                key: releaseUrl
           {{- end }}
           # foundry configuration files
           - name: FOUNDRY_ADMIN_KEY
@@ -122,7 +125,7 @@ spec:
           - name: FOUNDRY_LANGUAGE
             value: {{ .Values.foundryvtt.language }}
           {{- end }}
-          {{- if or .Values.foundryvtt.licenseKey  (!empty .Values.foundryvtt.configSecretName) }}
+          {{- if or .Values.foundryvtt.licenseKey  (not (empty .Values.foundryvtt.configSecretName)) }}
           - name: FOUNDRY_LICENSE_KEY
             valueFrom:
               secretKeyRef:
