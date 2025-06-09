@@ -90,14 +90,14 @@ spec:
             value: {{ .Values.container.verbose | quote }}
           {{- end }}
           # Foundry fetch files only
-          {{- if .Values.foundryvtt.username }}
+          {{- if or .Values.foundryvtt.username  (ne .Values.foundryvtt.configSecretName "")}}
           - name: FOUNDRY_USERNAME
             valueFrom:
               secretKeyRef:
                 name: {{ default (include "foundry-vtt.fullname" . ) .Values.foundryvtt.configSecretName }}
                 key: username
           {{- end }}
-          {{- if .Values.foundryvtt.password }}
+          {{- if or .Values.foundryvtt.password  (ne .Values.foundryvtt.configSecretName "") }}
           - name: FOUNDRY_PASSWORD
             valueFrom:
               secretKeyRef:
@@ -122,7 +122,7 @@ spec:
           - name: FOUNDRY_LANGUAGE
             value: {{ .Values.foundryvtt.language }}
           {{- end }}
-          {{- if .Values.foundryvtt.licenseKey }}
+          {{- if or .Values.foundryvtt.licenseKey (ne .Values.foundryvtt.configSecretName "") }}
           - name: FOUNDRY_LICENSE_KEY
             valueFrom:
               secretKeyRef:
