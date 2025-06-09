@@ -74,8 +74,7 @@ questions:
   - variable: foundryvtt.configSecretName
     label: Config Secret
     description: An existing secret to define the username, password, adminPassword, or licenceKey from (all keys must exist, even if empty).
-    default: reference_secret
-    type: string
+    type: reference_secret
     group: Foundry
 
   - variable: foundryvtt.username
@@ -108,3 +107,24 @@ questions:
     default: admin
     type: string
     group: Foundry
+
+  - variable: ingress.enabled
+    label: Enable Ingress
+    type: boolean
+    default: true
+
+  - variable: ingress.class
+    show_if: "ingress.enabled=true"
+    label: Ingress Class
+    description: Either nginx, contour, or traefik.
+    group: Ingress
+    type: enum
+    options:
+      - "nginx"
+      - "contour"
+      - "traefik"
+  - variable: ingress.configurationSnippet
+    label: Configuration snippet
+    description: Add additional Nginx configuration here.
+    show_if: "ingress.class=nginx"
+    type: multiline
