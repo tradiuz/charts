@@ -202,8 +202,7 @@ service:
 ## @param foundryvtt.username Username of the Account who bought the FoundryVTT License
 ## @param foundryvtt.password Password of the Account who bought the FoundryVTT License
 ## @param foundryvtt.licenseKey License Key for FoundryVTT. If set the account infos are ignored.
-## @param foundryvtt.existingSecret Name of an existing Secret to fetch the account from. If set, account settings from values are ignored. Must be used in combination with `foundryvtt.existingLicenseType` to fetch the correct data
-## @param foundryvtt.existingLicenseType Type of License to be fetched from the existing secret. Must be either `account` or `licenseKey`. If set to `account`, the `existingSecret` must contain a `username`/`password` data pair. If set to `licenseKey`, the secret must contain a `licenseKey` data entry
+## @param foundryvtt.configSecretName Name of an existing Secret to fetch the account from. If set, account settings from values are ignored. Make sure the keys are defined, even if empty.
 ## @param foundryvtt.hostname Hostname of FoundryVTT
 ## @param foundryvtt.language Language to use
 ## @param foundryvtt.minifyStaticFiles Whether to minify static files or not

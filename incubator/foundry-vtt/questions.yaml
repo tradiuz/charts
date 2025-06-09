@@ -1,0 +1,110 @@
+---
+questions:
+  - variable: foundryvtt.version
+    label: Version
+    description: Version of foundry to run
+    default: "13.345"
+    type: string
+    group: Foundry
+
+  - variable: foundryvtt.hostname
+    label: Foundry hostname
+    description: Hostname that goes into the foundry config to generate invite links (can be different than the ingress hostname).
+    type: string
+    group: Foundry
+
+  - variable: foundryvtt.routePrefix
+    label: Url prefix
+    description: Path that is appended after the hostname before foundry (e.g. serving foundry from a subfolder of a domain)
+    type: string
+    group: Foundry
+
+  - variable: foundryvtt.cssTheme
+    group: Foundry
+    label: Theme
+    description: Theme for the Foundry instance
+    type: enum
+    default: "foundry"
+    options:
+      - "foundry"
+      - "fantasy"
+      - "scifi"
+
+  - variable: foundryvtt.language
+    label: Language
+    description: Language for foundry
+    default: en.core
+    type: string
+    group: Foundry
+
+  - variable: foundryvtt.minifyStaticFiles
+    label: Minify static files
+    description: Set to `true` to reduce network traffic by serving minified static JavaScript and CSS files.  Enabling this setting is recommended for most users, but module developers may wish to disable it.
+    default: true
+    type: boolean
+    group: Foundry
+
+  - variable: foundryvtt.proxySSL
+    label: ProxySSL
+    description: Indicates whether the software is running behind a reverse proxy that uses SSL. This allows invitation links and A/V functionality to work as if the Foundry Server had SSL configured directly.
+    default: false
+    type: boolean
+    group: Foundry
+
+  - variable: foundryvtt.proxyPort
+    label: Inform Foundry of the port behin
+    description: Inform the Foundry Server that the software is running behind a reverse proxy on some other port. This allows the invitation links created to the game to include the correct external port.
+    default:
+    type: string
+    group: Foundry
+
+  - variable: foundryvtt.upnp
+    label: Enable UPnP
+    description: Allow Universal Plug and Play to automatically request port forwarding for the Foundry VTT port to your local network address.
+    default: false
+    type: boolean
+    group: Foundry
+
+  - variable: foundryvtt.world
+    label: World
+    description: The world to start up at system start.
+    type: string
+    group: Foundry
+
+  - variable: foundryvtt.configSecretName
+    label: Config Secret
+    description: An existing secret to define the username, password, adminPassword, or licenceKey from (all keys must exist, even if empty).
+    default: reference_secret
+    type: string
+    group: Foundry
+
+  - variable: foundryvtt.username
+    label: FoundryVTT.com Username
+    description: Account username or email address for foundryvtt.com. Required for downloading an application distribution.
+    type: string
+    group: Foundry
+
+  - variable: foundryvtt.password
+    label: FoundryVTT.com Password
+    description: Account password for foundryvtt.com. Required for downloading an application distribution.
+    type: string
+    group: Foundry
+
+  - variable: foundryvtt.releaseUrl
+    label: Release URL
+    description: A URL to download the install files from.  Either Foundry User/Pass or Release URL must be defined to download the installer.
+    type: string
+    group: Foundry
+
+  - variable: foundryvtt.licenseKey
+    label: License key
+    description: The license key to install (should be formatted like AAAA-BBBB-CCCC-DDDD-EEEE-FFFF).  If left blank, will either be populated when logging into the account, or will be requested when logging into the server after it starts.
+    type: string
+    group: Foundry
+
+  - variable: foundryvtt.adminPassword
+    label: Admin Password
+    description: Admin password for the Foundry instance
+    default: admin
+    type: string
+    group: Foundry
