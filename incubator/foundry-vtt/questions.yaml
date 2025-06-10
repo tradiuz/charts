@@ -45,14 +45,14 @@ questions:
     group: Foundry
 
   - variable: foundryvtt.proxySSL
-    label: ProxySSL
+    label: Proxy SSL?
     description: Indicates whether the software is running behind a reverse proxy that uses SSL. This allows invitation links and A/V functionality to work as if the Foundry Server had SSL configured directly.
     default: false
     type: boolean
     group: Foundry
 
   - variable: foundryvtt.proxyPort
-    label: Inform Foundry of the port behin
+    label: Proxy Port
     description: Inform the Foundry Server that the software is running behind a reverse proxy on some other port. This allows the invitation links created to the game to include the correct external port.
     default:
     type: string
@@ -74,7 +74,7 @@ questions:
   - variable: foundryvtt.configSecretName
     label: Config Secret
     description: An existing secret to define the username, password, adminPassword, or licenceKey from (all keys must exist, even if empty).
-    type: string
+    type: secret
     group: Foundry
 
   - variable: foundryvtt.username
@@ -86,7 +86,7 @@ questions:
   - variable: foundryvtt.password
     label: FoundryVTT.com Password
     description: Account password for foundryvtt.com. Required for downloading an application distribution.
-    type: string
+    type: password
     group: Foundry
 
   - variable: foundryvtt.releaseUrl
@@ -98,14 +98,14 @@ questions:
   - variable: foundryvtt.licenseKey
     label: License key
     description: The license key to install (should be formatted like AAAA-BBBB-CCCC-DDDD-EEEE-FFFF).  If left blank, will either be populated when logging into the account, or will be requested when logging into the server after it starts.
-    type: string
+    type: password
     group: Foundry
 
   - variable: foundryvtt.adminPassword
     label: Admin Password
     description: Admin password for the Foundry instance
     default: admin
-    type: string
+    type: password
     group: Foundry
 
   - variable: ingress.enabled
@@ -113,6 +113,68 @@ questions:
     label: Enable Ingress
     type: boolean
     default: true
+
+  - variable: ingress.tls.enabled
+    show_if: "ingress.enabled=true"
+    label: TLS
+    description: Will the Ingress use TLS?
+    group: Ingress
+    type: boolean
+
+  - variable: ingress.tls.source
+    show_if: "ingress.tls.enabled=true"
+    label: TLS Source
+    description: What is the source of the certificate?
+    group: Ingress
+    type: enum
+    options:
+      - "external"
+      - "secret"
+      - "letsEncrypt"
+
+  - variable: ingress.selfsigned.enabled
+    show_if: "ingress.tls.source=secret"
+    label: Use Self-Signed Cert
+    group: Ingress
+    type: boolean
+    show_subquestion_if: "true"
+    subquestions:
+      - variable: ingress.selfsigned.cert
+        label: "Certificate"
+        type: multiline
+      - variable: ingress.selfsigned.key
+        label: "Certificate"
+        type: multiline
+
+  - variable: ingress.tls.secretName
+    show_if: "ingress.tls.source=secret"
+    label: TLS Source
+    description: What is the name of the secret for the certificate? (Only change if selfsigned is disabled and you want a different secret name)
+    group: Ingress
+    type: secret
+    default: ""
+
+  - variable: ingress.letsEncrypt.enabled
+    show_if: "ingress.tls.source=letsEncrypt"
+    label: Enable Lets Encrypt
+    group: Ingress
+    type: boolean
+
+  - variable: ingress.letsEncrypt.environment
+    show_if: "ingress.letsEncrypt.enabled=true"
+    label: LetsEncrypt Environment
+    group: Ingress
+    type: enum
+    options:
+      - "staging"
+      - "production"
+    default: staging
+
+  - variable: ingress.letsEncrypt.environment
+    show_if: "ingress.letsEncrypt.enabled=true"
+    label: LetsEncrypt email
+    group: Ingress
+    type: string
 
   - variable: ingress.class
     show_if: "ingress.enabled=true"
@@ -131,6 +193,33 @@ questions:
     description: Add additional Nginx configuration here.
     show_if: "ingress.class=nginx"
     type: multiline
+
+  - variable: ingress.hostname
+    show_if: "ingress.enabled=true"
+    label: Hostname
+    description: FQDN/Hostname that will allow connections to the Foundry instance (if using tls, must match a name in the certificate)
+    group: Ingress
+    type: string
+
+  - variable: ingress.pathType
+    show_if: "ingress.enabled=true"
+    label: Path Type
+    description: Type of Path
+    group: Ingress
+    type: enum
+    default: "Prefix"
+    options:
+      - "Prefix"
+      - "Exact"
+      - "ImplementationSpecific"
+
+  - variable: ingress.path
+    show_if: "ingress.enabled=true"
+    label: Path
+    description: Path to the Foundry instance
+    group: Ingress
+    type: string
+    default: "/"
 
   - variable: image.repository
     label: Image repository
