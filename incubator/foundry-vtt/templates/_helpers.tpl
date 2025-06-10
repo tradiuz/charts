@@ -94,7 +94,7 @@ eks.amazonaws.com/role-arn: arn:aws:iam::{{ $accountId }}:role/{{ . }}
 
 {{- define "foundry-vtt.container.securityContext"}}
 {{- $UserAndGroup := dict  "runAsGroup" (default 1000 .Values.container.gid)  "runAsUser" (default 1000 .Values.container.uid) }}
-{{ merge $UserAndGroup  .Values.SecurityContext }}
+{{ merge $UserAndGroup  .Values.securityContext }}
 {{- end}}
 
 {{- define "foundry-vtt.pod.securityContext"}}
