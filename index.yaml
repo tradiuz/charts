@@ -3,6 +3,31 @@ entries:
   foundry-vtt:
   - apiVersion: v2
     appVersion: v13.345
+    created: "2025-06-10T21:08:04.595426847Z"
+    description: Foundry Virtual Tabletop (beta)
+    digest: 1b8378644d725c3302482797322cbb68901bfa87e62602870048ca9cd25277b9
+    icon: https://artifacthub.io/image/3e8ce5cf-7afe-4032-bae2-500b17e64b11@1x
+    keywords:
+    - game
+    - server
+    - vtt
+    - virtualtabletop
+    - foundryvtt
+    - foundry
+    maintainers:
+    - email: hugo.kenshin@gmail.com
+      name: hugoprudente
+    - email: tradiuz@gmail.com
+      name: tradiuz
+    name: foundry-vtt
+    sources:
+    - https://github.com/hugoprudente/charts/tree/main/incubator/foundry-vtt
+    type: application
+    urls:
+    - https://github.com/tradiuz/charts/releases/download/foundry-vtt-13.345.15/foundry-vtt-13.345.15.tgz
+    version: 13.345.15
+  - apiVersion: v2
+    appVersion: v13.345
     created: "2025-06-10T20:54:30.767760092Z"
     description: Foundry Virtual Tabletop (beta)
     digest: 515764188090e424cf332bd12fdff4a18e0075e2fe303185208c4b68d43404da
@@ -349,4 +374,4 @@ entries:
     urls:
     - https://github.com/tradiuz/charts/releases/download/foundry-vtt-12.324.0/foundry-vtt-12.324.0.tgz
     version: 12.324.0
-generated: "2025-06-10T20:54:30.768218625Z"
+generated: "2025-06-10T21:08:04.595877834Z"
