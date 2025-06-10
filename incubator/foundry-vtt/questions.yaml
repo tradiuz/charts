@@ -292,17 +292,6 @@ questions:
     description: "Do not use this with bind mount"
     type: storageclass
 
-  - variable: persistence.bind.enabled
-    group: Storage Persistence
-    label: Bind Mount Enabled
-    default: false
-    type: boolean
-    show_subquestion_if: true
-    subquestions:
-      - variable: persistence.bind.hostpath
-        label: Host path
-        type: string
-
   - variable: persistence.dataDir.enabled
     group: Storage Persistence
     label: Data Directory
@@ -319,9 +308,10 @@ questions:
     label: Service Type
     group: Service
     type: enum
+    default: "ClusterIP"
     options:
-      - "LoadBalancer"
       - "ClusterIP"
+      - "LoadBalancer"
 
   - variable: service.port
     label: Port

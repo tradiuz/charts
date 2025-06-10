@@ -8,8 +8,6 @@ spec:
   strategy:
     type: Recreate
   replicas: 1
-  # Needed to keep license from being invalid every reboot!
-  hostname: {{ include "foundry-vtt.fullname" . }}    
   selector:
     matchLabels:
       {{- include "foundry-vtt.selectorLabels" . | nindent 6 }}
@@ -17,13 +15,16 @@ spec:
     metadata:
       labels:
         {{- include "foundry-vtt.selectorLabels" . | nindent 8 }}
-    spec:
+    spec:  
+      # Needed to keep license from being invalid every reboot!
+      hostname: {{ include "foundry-vtt.fullname" . }}    
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       serviceAccountName: {{ include "foundry-vtt.serviceAccountName" . }}
       securityContext:
+        - fsGroup: {{  .Values.container.gid . }}
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       dnsPolicy: {{ .Values.dnsPolicy }}
       {{- if .Values.dnsConfig }}
@@ -33,6 +34,8 @@ spec:
       containers:
       - name: {{ .Chart.Name }}
         securityContext:
+          - runAsUser: {{  .Values.container.uid . }}
+          - runAsGroup: {{  .Values.container.gid . }}
           {{- toYaml .Values.securityContext | nindent 12 }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
