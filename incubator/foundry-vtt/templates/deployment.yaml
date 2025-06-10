@@ -8,6 +8,8 @@ spec:
   strategy:
     type: Recreate
   replicas: 1
+  # Needed to keep license from being invalid every reboot!
+  hostname: {{ include "foundry-vtt.fullname" . }}    
   selector:
     matchLabels:
       {{- include "foundry-vtt.selectorLabels" . | nindent 6 }}
