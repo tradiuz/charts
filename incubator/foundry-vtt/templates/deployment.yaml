@@ -24,7 +24,7 @@ spec:
     {{- end }}
       serviceAccountName: {{ include "foundry-vtt.serviceAccountName" . }}
       securityContext: 
-        {{- toYaml (include "foundry-vtt.pod.securityContext" .) | nindent 8 }}
+        {{- toYaml (merge (dict  "fsGroup" (default 1000 .Values.container.gid)) .Values.podSecurityContext ) | nindent 8 }}
       dnsPolicy: {{ .Values.dnsPolicy }}
       {{- if .Values.dnsConfig }}
       dnsConfig:
@@ -33,7 +33,7 @@ spec:
       containers:
       - name: {{ .Chart.Name }}
         securityContext:
-          {{- toYaml (include "foundry-vtt.container.securityContext" .) | nindent 12 }}
+          {{- toYaml (merge (dict  "runAsGroup" (default 1000 .Values.container.gid)  "runAsUser" (default 1000 .Values.container.uid)) .Values.securityContext) | nindent 12 }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
