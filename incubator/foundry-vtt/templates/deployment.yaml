@@ -23,7 +23,7 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       serviceAccountName: {{ include "foundry-vtt.serviceAccountName" . }}
-      securityContext: {{ compact (concat (list {"fsGroup": (default 1000 .Values.container.gid)} .Values.podSecurityContext ) )}}
+      securityContext: {{ compact (concat (list (dict "fsGroup" (default 1000 .Values.container.gid))) .Values.podSecurityContext )}}
         # - fsGroup: {{ default 1000 .Values.container.gid }}
         # {{- toYaml .Values.podSecurityContext | nindent 8 }}
       dnsPolicy: {{ .Values.dnsPolicy }}
@@ -33,7 +33,7 @@ spec:
       {{- end }}
       containers:
       - name: {{ .Chart.Name }}
-        securityContext:  {{ compact (concat (list ({"runAsGroup": (default 1000 .Values.container.gid)} {"runAsUser": (default 1000 .Values.container.uid)}) .Values.SecurityContext ) )}}
+        securityContext:  {{ compact (concat (list (dict "runAsGroup" (default 1000 .Values.container.gid)) (dict "runAsUser" (default 1000 .Values.container.uid))) .Values.SecurityContext )}}
         #  - runAsUser: {{ default 1000 .Values.container.uid }}
         #  - runAsGroup: {{ default 1000 .Values.container.gid }}
         #  {{- toYaml .Values.securityContext | nindent 12 }}
