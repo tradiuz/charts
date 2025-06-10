@@ -304,6 +304,7 @@ foundryvtt:
 ## @param ingress.pathType Type of Path
 ## @param ingress.tls.enabled Enable or Disable TLS
 ## @param ingress.tls.source the source of your signed certification, allowed {}, external, secret, or letsEncrypt
+## @param ingress.tls.secretName the name of the secret if the source is secret.
 ## @param ingress.configurationSnippet Extra NGINX Configuration to add as Annotation
 ingress:
   # options: nginx, contour, traefik
@@ -328,6 +329,7 @@ ingress:
     enabled: true
     # {}, external, secret, or letsEncrypt
     source: external
+#    secretName: ''
 
 ## @section Let's Encrypt configuration
 ## @param letsEncrypt.enabled Enable the Let's Encrypt for Cert Manager
