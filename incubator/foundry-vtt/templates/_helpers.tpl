@@ -91,3 +91,4 @@ eks.amazonaws.com/role-arn: arn:aws:iam::{{ $accountId }}:role/{{ . }}
 {{- end }}
 {{- end }}
 {{- end -}}
+
