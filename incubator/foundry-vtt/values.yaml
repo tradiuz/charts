@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=./values.schema.json
 # Default values for foundry-vtt.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
@@ -15,6 +16,7 @@ nameOverride: ""
 fullnameOverride: ""
 dnsPolicy: "ClusterFirst"
 dnsConfig:
+  {}
   # nameservers:
   #   - 8.8.8.8
 threadCount: "6"
@@ -115,7 +117,7 @@ container:
   preserveConfig: false
 
   ## Normally the ownership of the `/data` directory and its contents are changed to match that of the server at startup.  Setting this to a regular expression will exclude any matching paths and preserve their ownership.   _Note: This is a match on the whole path, not a search._  This is useful if you want mount a volume as read-only inside `/data`
-  preserveOwner:
+  preserveOwner: ""
 
   ## Container [TZ database name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List). Default is UTC
   timezone: UTC
