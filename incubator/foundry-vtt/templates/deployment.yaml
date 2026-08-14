@@ -59,6 +59,18 @@ spec:
         env:
           - name: UV_THREADPOOL_SIZE
             value: {{ .Values.threadCount | quote }}
+          {{- if .Values.oauth.enabled }}
+          - name: HEADER_USERNAME
+            value: {{ .Values.oauth.headers.username }}
+          - name: HEADER_ROLES
+            value: {{ .Values.oauth.headers.roles }}
+          - name: HEADER_ROLES_SEPARATOR
+            value: {{ .Values.oauth.headers.rolesSeparator }}
+          - name: ROLE_PLAYER
+            value: {{ .Values.oauth.roles.player }}
+          - name: ROLE_ADMIN
+            value: {{ .Values.oauth.roles.admin }}
+          {{- end }}
           {{- if .Values.container.cache }}
           - name: CONTAINER_CACHE
             value: {{ .Values.container.cache }}
