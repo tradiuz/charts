@@ -3,7 +3,7 @@ questions:
   - variable: foundryvtt.version
     label: Version
     description: Version of foundry to run
-    default: "13.345"
+    default: "14.365"
     type: string
     group: Foundry
 
