@@ -275,6 +275,42 @@ questions:
     default: false
     type: boolean
 
+  - variable: oauth.enabled
+    group: OAuth
+    label: Enable OAuth
+    default: false
+    type: boolean
+
+  - variable: oauth.headers.username
+    group: OAuth
+    label: Username Header
+    default: 'x-authentik-username'
+    type: string
+
+  - variable: oauth.headers.role
+    group: OAuth
+    label: Role Header
+    default: 'x-authentik-entitlements'
+    type: string
+
+  - variable: oauth.headers.roleSeparator
+    group: OAuth
+    label: Role Header Separator
+    default: '|'
+    type: string
+
+  - variable: oauth.roles.admin
+    group: OAuth
+    label: Admin Role
+    default: 'foundry-admin'
+    type: string
+
+  - variable: oauth.roles.player
+    group: OAuth
+    label: Player Role
+    default: 'foundry-player'
+    type: string
+
   - variable: persistence.bind.enabled
     group: Storage Persistence
     label: Bind Mount Enabled
