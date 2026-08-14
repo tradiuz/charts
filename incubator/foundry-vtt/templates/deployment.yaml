@@ -61,15 +61,15 @@ spec:
             value: {{ .Values.threadCount | quote }}
           {{- if .Values.oauth.enabled }}
           - name: HEADER_USERNAME
-            value: {{ .Values.oauth.headers.username }}
+            value: {{ .Values.oauth.headers.username | quote }}
           - name: HEADER_ROLES
-            value: {{ .Values.oauth.headers.roles }}
+            value: {{ .Values.oauth.headers.roles | quote }}
           - name: HEADER_ROLES_SEPARATOR
-            value: {{ .Values.oauth.headers.rolesSeparator }}
+            value: {{ .Values.oauth.headers.rolesSeparator | quote }}
           - name: ROLE_PLAYER
-            value: {{ .Values.oauth.roles.player }}
+            value: {{ .Values.oauth.roles.player | quote }}
           - name: ROLE_ADMIN
-            value: {{ .Values.oauth.roles.admin }}
+            value: {{ .Values.oauth.roles.admin | quote }}
           {{- end }}
           {{- if .Values.container.cache }}
           - name: CONTAINER_CACHE

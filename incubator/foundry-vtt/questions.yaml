@@ -275,6 +275,18 @@ questions:
     default: false
     type: boolean
 
+  - variable: container.patchUrls
+    group: Container
+    label: Patch URLS
+    description: Only use patch URLs that you trust.
+    type: listofstrings
+
+  - variable: container.verbose
+    group: Container
+    label: Verbose
+    default: false
+    type: boolean
+
   - variable: oauth.enabled
     group: OAuth
     label: Enable OAuth
