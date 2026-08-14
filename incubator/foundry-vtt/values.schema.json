@@ -65,7 +65,7 @@
         "roles": {
           "type": "string"
         },
-        "roleSeparator": {
+        "rolesSeparator": {
           "type": "string"
         }
       },

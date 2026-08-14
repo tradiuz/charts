@@ -140,8 +140,8 @@ oauth:
   enabled: false
   headers:
     username: 'x-authentik-username'
-    role: 'x-authentik-entitlements'
-    roleSeparator: '|'
+    roles: 'x-authentik-entitlements'
+    rolesSeparator: '|'
   roles:
     player: 'foundry-player'
     admin: 'foundry-admin'
