@@ -287,15 +287,15 @@ questions:
     default: 'x-authentik-username'
     type: string
 
-  - variable: oauth.headers.role
+  - variable: oauth.headers.roles
     group: OAuth
-    label: Role Header
+    label: Roles Header
     default: 'x-authentik-entitlements'
     type: string
 
-  - variable: oauth.headers.roleSeparator
+  - variable: oauth.headers.rolesSeparator
     group: OAuth
-    label: Role Header Separator
+    label: Roles Separator
     default: '|'
     type: string
 
