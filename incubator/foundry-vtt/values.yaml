@@ -128,6 +128,25 @@ container:
   ## Set to `true` to enable verbose logging for the container utility scripts. Default is false
   verbose: false
 
+## @section OAuth
+## @param oauth.enabled Enable OAuth (ensure the patchUrl is set!)
+## @param oauth.headers.username Username Header
+## @param oauth.headers.role Role Header
+## @param oauth.headers.roleSeparator Separator for the roles.
+## @param oauth.roles.player Role that defines a player
+## @param oauth.roles.admin Role that defines an admin
+
+oauth:
+  enabled: false
+  headers:
+    username: 'x-authentik-username'
+    role: 'x-authentik-entitlements'
+    roleSeparator: '|'
+  roles:
+    player: 'foundry-player'
+    admin: 'foundry-admin'
+
+
 ## @section Persistence Storage Parameters
 ## @param persistence.bind.enabled Enable bind mount for persistence storage
 ## @param persistence.bind.hostpath Path in the host where to bind
